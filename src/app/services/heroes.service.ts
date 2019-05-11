@@ -6,6 +6,7 @@ export interface IHeroe {
   img: string;
   aparicion: string;
   casa: string;
+  idx?: number;
 }
 
 @Injectable()
@@ -73,6 +74,22 @@ export class HeroesService {
 
   getHeroe(idx) {
     return this.heroes[idx];
+  }
+
+  buscarHeroe(termino: string) {
+    const heroesArr: IHeroe[] = [];
+    termino = termino.toLowerCase();
+
+    for (let i = 0; i < this.heroes.length; i++) {
+      const heroe = this.heroes[i];
+      const nombre = heroe.nombre.toLocaleLowerCase();
+      if (nombre.indexOf(termino) >= 0 ) {
+        heroe.idx = i;
+        heroesArr.push( heroe );
+      }
+    }
+
+    return heroesArr;
   }
 
 }

@@ -1,0 +1,14 @@
+<h1>Buscando: {{termino}} <small>Marvel y DC</small></h1>
+<hr>
+
+<div class="row animated fadeIn fast">
+    <div class="col-md-12" *ngIf="heroes.length === 0">
+        <div class="alert alert-warning" role="alert">
+            No existen resultados con el término: {{ termino }}
+        </div>
+    </div>
+</div>
+
+<div class="card-columns" *ngIf="heroes.length > 0">
+    <app-heroe-tarjeta (heroeSeleccionado)="viewHero($event)" [heroe]="heroe" [index]="heroe.idx" *ngFor="let heroe of heroes; let i = index"></app-heroe-tarjeta>
+</div>
